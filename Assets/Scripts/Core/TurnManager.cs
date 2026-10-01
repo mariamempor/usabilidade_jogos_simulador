@@ -32,26 +32,22 @@ namespace CleanSlate.Core
             financialManager.ApplyEndOfDayRisk();
             if (GameManager.Instance.State == GameManager.GameState.GameOver) yield break;
 
-            workCanvas.DOFade(0f, fadeDuration).SetUpdate(true);
-            yield return new WaitForSecondsRealtime(fadeDuration);
+            yield return UiTransitionUtility.Fade(workCanvas, 0f, fadeDuration);
             workCanvas.interactable = false;
             workCanvas.blocksRaycasts = false;
             pixelRoomRoot.SetActive(true);
 
             yield return pixelRoutine.PlayEvening();
-            blackOverlay.DOFade(1f, fadeDuration).SetUpdate(true);
-            yield return new WaitForSecondsRealtime(fadeDuration);
+            yield return UiTransitionUtility.Fade(blackOverlay, 1f, fadeDuration);
 
             int nextDay = GameManager.Instance.CurrentDay + 1;
             dayLabel.text = $"DIA {nextDay} - 07:00 AM";
             yield return new WaitForSecondsRealtime(dayCardDuration);
             yield return pixelRoutine.PlayMorning();
 
-            blackOverlay.DOFade(0f, fadeDuration).SetUpdate(true);
-            yield return new WaitForSecondsRealtime(fadeDuration);
+            yield return UiTransitionUtility.Fade(blackOverlay, 0f, fadeDuration);
             pixelRoomRoot.SetActive(false);
-            workCanvas.DOFade(1f, fadeDuration).SetUpdate(true);
-            yield return new WaitForSecondsRealtime(fadeDuration);
+            yield return UiTransitionUtility.Fade(workCanvas, 1f, fadeDuration);
             workCanvas.interactable = true;
             workCanvas.blocksRaycasts = true;
             GameManager.Instance.StartNextDay();

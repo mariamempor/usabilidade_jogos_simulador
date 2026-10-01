@@ -8,7 +8,7 @@ Protótipo 2D para Unity com dois loops: um dashboard de trabalho corporativo e 
 
 - Unity **2022.3 LTS** ou superior (template **2D Core**).
 - TextMeshPro pode ser usado nos prefabs finais, mas os scripts de exemplo usam `UnityEngine.UI.Text` para funcionar sem migração adicional.
-- Instale **DOTween** pelo Asset Store/Package Manager e execute **Tools > Demigiant > DOTween Utility Panel > Setup DOTween**. Os scripts importam `DG.Tweening` e não exigem Animator.
+- Não há dependências de tweening: os fades e microanimações usam corrotinas nativas, `CanvasGroup.alpha`, `Transform.localScale` e tempo não escalado do Unity.
 
 ## Estrutura de pastas
 
@@ -87,18 +87,18 @@ suspeita aplicada = Σ(valor processado × fator de risco da empresa) × (1 − 
 
 Em seguida, `TurnManager` faz fade do PC, toca a rotina noturna, mostra o cartão do próximo dia, toca a manhã, liga o monitor e restaura o Canvas. `GameManager` impede operações fora de `Work` e encerra o jogo ao chegar a 100% de suspeita ou ao fim do prazo.
 
-## Animações UI com DOTween
+## Animações UI nativas (sem dependências)
 
-O projeto usa `DOFade`, `DOScale`, `SetEase(Ease.OutBack)` e `SetUpdate(true)`. O último permite que as transições visuais continuem mesmo se a equipe decidir pausar `Time.timeScale`. Para novos painéis, mantenha a animação no controlador da view e use este padrão:
+`UiTransitionUtility` implementa `Fade` para `CanvasGroup` e `ScaleIn` para `Transform` usando `IEnumerator`, `Time.unscaledDeltaTime` e `Mathf`. Por isso, as transições continuam mesmo se a equipe pausar `Time.timeScale`, sem instalar pacotes de animação nem configurar um Animator. Para um novo painel, mantenha a animação no controlador da view e use este padrão:
 
 ```csharp
 panel.alpha = 0f;
-panel.DOFade(1f, 0.25f).SetUpdate(true);
-panel.transform.localScale = Vector3.one * .92f;
-panel.transform.DOScale(1f, .25f).SetEase(Ease.OutBack).SetUpdate(true);
+yield return UiTransitionUtility.Fade(panel, 1f, 0.25f);
+popup.transform.localScale = Vector3.zero;
+yield return UiTransitionUtility.ScaleIn(popup.transform, 0.25f);
 ```
 
-Antes de destruir um popup, finalize seus tweens com `transform.DOKill()` se ele ganhar animações longas. Evite Animator para microinterações de dashboard; reserve sprites para a rotina em pixel art.
+As corrotinas terminam automaticamente quando o objeto é destruído. Evite Animator para microinterações de dashboard; reserve sprites para a rotina em pixel art.
 
 ## Referências visuais para moodboard (não copiar assets)
 

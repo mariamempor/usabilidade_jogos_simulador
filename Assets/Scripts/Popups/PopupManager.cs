@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using CleanSlate.Core;
-using DG.Tweening;
 using UnityEngine;
 
 namespace CleanSlate.Popups
@@ -45,7 +44,7 @@ namespace CleanSlate.Popups
             NewsPopupView view = Instantiate(newsPopupPrefab, popupLayer);
             view.Bind(data);
             view.transform.localScale = Vector3.zero;
-            view.transform.DOScale(1f, .25f).SetEase(Ease.OutBack).SetUpdate(true);
+            StartCoroutine(UiTransitionUtility.ScaleIn(view.transform, .25f));
             GameManager.Instance.ChangeSuspicion(data.suspicionImpact);
         }
 
@@ -54,7 +53,7 @@ namespace CleanSlate.Popups
             OfficialPopupView view = Instantiate(officialPopupPrefab, popupLayer);
             view.Bind(data, choice => ResolveOfficialChoice(data, choice));
             view.transform.localScale = Vector3.zero;
-            view.transform.DOScale(1f, .25f).SetEase(Ease.OutBack).SetUpdate(true);
+            StartCoroutine(UiTransitionUtility.ScaleIn(view.transform, .25f));
         }
 
         private void ResolveOfficialChoice(PoliceEventSO data, OfficialChoice choice)
