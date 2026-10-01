@@ -114,3 +114,14 @@ Use essas referências apenas como linguagem visual. Produza sprites, textos, í
 1. **Rede de confiança**: contatos fictícios têm favores limitados; cada ajuda baixa risco agora, mas cria uma obrigação em dias posteriores.
 2. **Auditoria explicável**: um painel “Por que meu risco subiu?” mostra um gráfico de contribuição por empresa e por evento, transformando derrota em aprendizado.
 3. **Modo apresentação**: um botão reproduz uma semana pré-configurada em 90 segundos, com destaques guiados para tutorial, operação, alerta e ciclo pixel art.
+
+## Correção do erro `CS0246` de namespace ausente
+
+Esta versão não contém referências a bibliotecas externas de animação. Se o Console ainda informar um namespace externo ausente em `TurnManager.cs` ou `PopupManager.cs`, o Editor está compilando uma cópia anterior dos arquivos ou um cache local.
+
+1. Feche o Unity.
+2. Confirme que `Assets/Scripts/Core/TurnManager.cs` não possui uma diretiva `using` de pacote externo e que `Assets/Scripts/Popups/PopupManager.cs` também não possui essa diretiva. Estas são as versões presentes neste repositório.
+3. Apague a pasta `Library` do **projeto local** (não a pasta `Assets` e não arquivos versionados). O Unity a recriará ao abrir o projeto.
+4. Abra o projeto novamente; se necessário, use **Assets > Reimport All**. Só saia do Safe Mode quando o Console não apresentar erros.
+
+Não instale nenhum pacote de animação para resolver esse erro: os scripts usam somente as APIs padrão do Unity (`IEnumerator`, `CanvasGroup`, `Transform`, `Mathf` e `Time`).
