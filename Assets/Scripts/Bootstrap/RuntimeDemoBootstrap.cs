@@ -63,7 +63,7 @@ namespace CleanSlate.Bootstrap
 
         private void CreateInterface()
         {
-            Font font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             GameObject canvasObject = new GameObject("CleanSlateCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             DontDestroyOnLoad(canvasObject);
             Canvas canvas = canvasObject.GetComponent<Canvas>();

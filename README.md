@@ -13,7 +13,7 @@ Protótipo 2D para Unity com dois loops: um dashboard de trabalho corporativo e 
 
 ## Executar o protótipo agora
 
-Não há um `.exe` dentro de `Assets`: no Unity, o teste é iniciado pelo botão **Play** do Editor. Para este protótipo, abra a pasta raiz no Unity Hub e pressione **Play**, inclusive na cena vazia `Untitled` mostrada pelo Editor. `RuntimeDemoBootstrap` é inicializado automaticamente após o carregamento da cena e cria o Canvas de tutorial e o dashboard de teste sem precisar arrastar objetos no Inspector.
+Não há um `.exe` dentro de `Assets`: no Unity, o teste é iniciado pelo botão **Play** do Editor. Para este protótipo, abra a pasta raiz no Unity Hub e pressione **Play**, inclusive na cena vazia `Untitled` mostrada pelo Editor. `RuntimeDemoBootstrap` é inicializado automaticamente após o carregamento da cena e cria o Canvas de tutorial e o dashboard de teste sem precisar arrastar objetos no Inspector. Ele usa a fonte interna `LegacyRuntime.ttf`, compatível com Unity 2022.3.
 
 No dashboard, clique em **INICIAR SIMULAÇÃO**, depois em **PROCESSAR R$ 8.000** e **ENCERRAR O DIA**. Para gerar um executável posteriormente, crie/salve uma cena em `Assets/Scenes/Main.unity`, adicione-a em **File > Build Settings > Scenes In Build** e escolha **Build**.
 
