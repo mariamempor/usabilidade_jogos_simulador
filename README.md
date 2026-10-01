@@ -10,6 +10,13 @@ Protótipo 2D para Unity com dois loops: um dashboard de trabalho corporativo e 
 - TextMeshPro pode ser usado nos prefabs finais, mas os scripts de exemplo usam `UnityEngine.UI.Text` para funcionar sem migração adicional.
 - Não há dependências de tweening: os fades e microanimações usam corrotinas nativas, `CanvasGroup.alpha`, `Transform.localScale` e tempo não escalado do Unity.
 
+
+## Executar o protótipo agora
+
+Não há um `.exe` dentro de `Assets`: no Unity, o teste é iniciado pelo botão **Play** do Editor. Para este protótipo, abra a pasta raiz no Unity Hub e pressione **Play**, inclusive na cena vazia `Untitled` mostrada pelo Editor. `RuntimeDemoBootstrap` é inicializado automaticamente após o carregamento da cena e cria o Canvas de tutorial e o dashboard de teste sem precisar arrastar objetos no Inspector.
+
+No dashboard, clique em **INICIAR SIMULAÇÃO**, depois em **PROCESSAR R$ 8.000** e **ENCERRAR O DIA**. Para gerar um executável posteriormente, crie/salve uma cena em `Assets/Scenes/Main.unity`, adicione-a em **File > Build Settings > Scenes In Build** e escolha **Build**.
+
 ## Estrutura de pastas
 
 ```text
